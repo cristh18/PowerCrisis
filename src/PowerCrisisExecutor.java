@@ -30,28 +30,12 @@ class PowerCrisisExecutor {
         counter = 0;
     }
 
-//    private static void calculateSmallestNumber() {
-//        int index = 1;
-//        if (N < 100 && N >= 13) {
-//            while (index < 240 && !validSeries) {
-//                init(N);
-//                buildSeries(N, index);
-//
-//                if (!validSeries) {
-//                    index++;
-//                }
-//            }
-//            validSeries = false;
-//            System.out.println(index);
-//        }
-//    }
-
     private static void calculateSmallestNumber() {
         int index = 1;
         if (N < 100 && N >= 13) {
             while (!validSeries) {
                 init(N);
-                otherCode(index);
+                buildSeries(index);
 
                 if (!validSeries) {
                     index++;
@@ -62,23 +46,7 @@ class PowerCrisisExecutor {
         }
     }
 
-
-    private static void buildSeries(int limit, int m) {
-
-        getNextRegion(limit, m);
-
-        if (turnedOffRegions.size() != N) {
-            regions.removeAll(turnedOffRegions);
-            buildSeries(regions.size(), m);
-        } else {
-            int lastIndex = turnedOffRegions.size() - 1;
-            int lastRegion = turnedOffRegions.get(lastIndex);
-            validSeries = lastRegion == REGION_13;
-        }
-    }
-
-
-    private static void otherCode(int m) {
+    private static void buildSeries(int m) {
 
         while (turnedOffRegions.size() < N) {
             getNextRegion(regions.size(), m);
