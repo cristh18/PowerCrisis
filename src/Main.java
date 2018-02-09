@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 class PowerCrisisExecutor {
@@ -30,28 +32,12 @@ class PowerCrisisExecutor {
         counter = 0;
     }
 
-//    private static void calculateSmallestNumber() {
-//        int index = 1;
-//        if (N < 100 && N >= 13) {
-//            while (index < 240 && !validSeries) {
-//                init(N);
-//                buildSeries(N, index);
-//
-//                if (!validSeries) {
-//                    index++;
-//                }
-//            }
-//            validSeries = false;
-//            System.out.println(index);
-//        }
-//    }
-
     private static void calculateSmallestNumber() {
         int index = 1;
         if (N < 100 && N >= 13) {
             while (!validSeries) {
                 init(N);
-                otherCode(index);
+                buildSeries(index);
 
                 if (!validSeries) {
                     index++;
@@ -63,22 +49,7 @@ class PowerCrisisExecutor {
     }
 
 
-    private static void buildSeries(int limit, int m) {
-
-        getNextRegion(limit, m);
-
-        if (turnedOffRegions.size() != N) {
-            regions.removeAll(turnedOffRegions);
-            buildSeries(regions.size(), m);
-        } else {
-            int lastIndex = turnedOffRegions.size() - 1;
-            int lastRegion = turnedOffRegions.get(lastIndex);
-            validSeries = lastRegion == REGION_13;
-        }
-    }
-
-
-    private static void otherCode(int m) {
+    private static void buildSeries(int m) {
 
         while (turnedOffRegions.size() < N) {
             getNextRegion(regions.size(), m);
@@ -104,34 +75,15 @@ class PowerCrisisExecutor {
         }
     }
 
-    private static void start() throws IOException, NumberFormatException {
-//        while (N != 0) {
-//            Scanner sc = new Scanner(System.in);
-//            if (sc.hasNextInt()) {
-//                N = sc.nextInt();
-//                calculateSmallestNumber();
-//            }
-//        }
-
-
-        String number = "18,58,74,61,87,51,50,82,57,56,99,30,34,97,81,41,24,17,52,73,42,54,37,84,88,14,90,70,80,48,96,19,39,47,13,98,76,68,53,35,62,91,65,46,28,95,93,16,64,44,79,21,72,94,22,40,29,86,60,77,36,75,92,38,55,78,26,67,20,49,43,15,63,31,45,33,89,71,66,69,32,27,23,83,59,25,85,0";
-
-        String[] arrayNumber = number.split(",");
-
-        for (String anArrayNumber : arrayNumber) {
-            N = Integer.parseInt(anArrayNumber);
+    public static void main(String[] args) throws IOException {
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        while (true) {
+            N = Integer.parseInt(br.readLine());
+            if (N == 0) {
+                break;
+            }
             calculateSmallestNumber();
-        }
-
-//        N = 57;
-//        calculateSmallestNumber();
-    }
-
-    public static void main(String[] args) {
-        try {
-            start();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
