@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-class PowerCrisisExecutor {
+class Main {
     private final static int REGION_13 = 13;
     private static ArrayList<Integer> regions;
     private static ArrayList<Integer> turnedOffRegions;
